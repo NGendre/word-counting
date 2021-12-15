@@ -8,7 +8,7 @@ with open(location, newline='',encoding='utf-8') as file:
     data = list(reader)
 
 wordlist = []
-
+print(data)
 #lowercase list
 for i in range(len(data)):
     data[i] = str(data[i]).lower()
@@ -26,9 +26,10 @@ for i in range(len(wordlist)):
         wordlist[i] = wordlist[i].replace(".","")
     if "]" in wordlist[i]:
         wordlist[i] = wordlist[i].replace("]","")
+    if ',' in wordlist[i]:
+        wordlist[i] = wordlist[i].replace(",","")
 
 
-print(wordlist)
 wordcounter = dict()
 
 for word in wordlist:
@@ -40,7 +41,7 @@ for word in wordlist:
 result = dict(sorted(wordcounter.items(),key=lambda item: item[1]))
 
 
-writeLocation = os.path.join(os.path.dirname(__file__),'results.csv')
+writeLocation = os.path.join(os.path.dirname(__file__), 'result.csv')
 
 with open(writeLocation,'w', newline='',encoding='utf-8') as file:
     writer = csv.writer(file)
