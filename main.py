@@ -1,6 +1,8 @@
 import csv
 import os
 
+
+#read file
 location = os.path.join(os.path.dirname(__file__),'file.csv')
 
 with open(location, newline='',encoding='utf-8') as file:
@@ -16,7 +18,7 @@ for i in range(len(data)):
     for j in range(len(words)):
         wordlist.append(words[j])
 
-
+#remove characters from str (there might be a better way to do this
 for i in range(len(wordlist)):
     if '[' in wordlist[i]:
         wordlist[i] = wordlist[i].replace("[","")
@@ -30,6 +32,7 @@ for i in range(len(wordlist)):
         wordlist[i] = wordlist[i].replace(",","")
 
 
+#creates a dict
 wordcounter = dict()
 
 for word in wordlist:
@@ -38,9 +41,12 @@ for word in wordlist:
     else:
         wordcounter[word] = 1
 
+
 result = dict(sorted(wordcounter.items(),key=lambda item: item[1]))
 
 
+#TODO sort by decreasing order
+print("Writing Results")
 writeLocation = os.path.join(os.path.dirname(__file__), 'result.csv')
 
 with open(writeLocation,'w', newline='',encoding='utf-8') as file:
